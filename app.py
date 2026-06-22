@@ -2,22 +2,25 @@
 
 import streamlit as st
 from modulos.ventas import mostrar_venta
+from modulos.entradas import mostrar_entrada
 from modulos.login import login
 
 # Comprobamos si la sesión ya está iniciada
 if "sesion_iniciada" in st.session_state and st.session_state["sesion_iniciada"]:
 
-    # Mostrar el menú lateral
-    opciones = ["ventas", "Otra opción"]
+    # Menú lateral
+    opciones = ["ventas", "entrada", "Otra opción"]
     seleccion = st.sidebar.selectbox("Selecciona una opción", opciones)
 
-    # Según la opción seleccionada, mostramos el contenido correspondiente
+    # Mostrar el módulo correspondiente
     if seleccion == "ventas":
         mostrar_venta()
+
+    elif seleccion == "entrada":
+        mostrar_entrada()
 
     elif seleccion == "Otra opción":
         st.write("Has seleccionado otra opción.")
 
 else:
-    # Si la sesión no está iniciada, mostrar el login
     login()
