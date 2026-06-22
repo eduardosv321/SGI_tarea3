@@ -2,7 +2,7 @@ import streamlit as st
 from modulos.config.conexion import obtener_conexion
 
 
-def verificar_usuario(usuario, contrasena):
+def verificar_usuario(Nombre, Contraseña):
     con = obtener_conexion()
     if not con:
         st.error("⚠️ No se pudo conectar a la base de datos.")
