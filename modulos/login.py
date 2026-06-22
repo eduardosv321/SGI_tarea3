@@ -13,8 +13,8 @@ def verificar_usuario(usuario, contrasena):
 
     try:
         cursor = con.cursor()
-        query = "SELECT Tipo_usuario FROM USUARIO WHERE usuario = %s AND contrasena = %s"
-        cursor.execute(query, (usuario, contrasena))
+        query = "SELECT Nombre, Contraseña FROM Usuarios WHERE Nombre = %s AND Contraseña = %s"
+        cursor.execute(query, (Nombre, Contraseña))
         result = cursor.fetchone()
         return result[0] if result else None
     finally:
@@ -28,15 +28,15 @@ def login():
     if st.session_state.get("conexion_exitosa"):
         st.success("✅ Conexión a la base de datos establecida correctamente.")
 
-    usuario = st.text_input("Usuario", key="usuario_input")
-    contrasena = st.text_input("Contraseña", type="password", key="contrasena_input")
+    Nombre = st.text_input("Nombre", key="nombre_input")
+    Contraseña = st.text_input("Contraseña", type="password", key="Contraseña_input")
 
     if st.button("Iniciar sesión"):
-        tipo = verificar_usuario(usuario, contrasena)
+        tipo = verificar_usuario(Nombre, Contraseña)
         if tipo:
-            st.session_state["usuario"] = usuario
-            st.session_state["tipo_usuario"] = tipo
-            st.success(f"Bienvenido ({tipo}) 👋")
+            st.session_state["Nombre"] = Nombre
+            st.session_state["tipo_nombre"] = tipo
+            st.success(f"Bienvenido ({Nombre}) 👋")
             st.session_state["sesion_iniciada"] = True
             st.rerun()
         else:
